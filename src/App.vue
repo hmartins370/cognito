@@ -55,20 +55,6 @@
               placeholder="Enter your new password"
               class="input input-bordered w-full"
             />
-            <input
-              type="text"
-              id="firstName"
-              v-model="firstName"
-              placeholder="Enter your first name"
-              class="input input-bordered w-full"
-            />
-            <input
-              type="text"
-              id="lastName"
-              v-model="lastName"
-              placeholder="Enter your last name"
-              class="input input-bordered w-full"
-            />
             <button :disabled="isLoading" class="btn btn-primary w-full">
               Submit
             </button>
@@ -151,8 +137,6 @@ const step = ref<any>()
 const setupUri = ref<URL>()
 
 const newPassword = ref('')
-const firstName = ref('')
-const lastName = ref('')
 
 const isLoading = ref(false)
 
@@ -214,12 +198,6 @@ const validateNewPassword = async () => {
   try {
     const { nextStep } = await confirmSignIn({
       challengeResponse: newPassword.value,
-      options: {
-        userAttributes: {
-          given_name: firstName.value,
-          family_name: lastName.value,
-        },
-      },
     })
     handleSignInStep(nextStep)
   } catch (error) {
